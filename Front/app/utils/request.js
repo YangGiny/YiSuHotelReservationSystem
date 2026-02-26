@@ -3,9 +3,8 @@ import { message } from "antd";
 import { useUserStore } from "../store/useUserStore";
 
 // 根据环境设置API基础URL
-const apiBaseUrl = import.meta.env.API_TARGET
-  ? import.meta.env.API_TARGET
-  : "";
+const apiBaseUrl =
+  import.meta.env.VITE_API_TARGET || "https://yisu-java-api.onrender.com";
 
 const service = axios.create({
   baseURL: apiBaseUrl,
@@ -34,7 +33,7 @@ service.interceptors.request.use(
     // 请求错误处理
     console.log(error); // for debug
     return Promise.reject(error);
-  }
+  },
 );
 
 // 响应拦截器, 预处理后端给前端返回数据
@@ -54,7 +53,7 @@ service.interceptors.response.use(
       message.error("请求错误");
       console.error("request.js Error: ", response.data?.msg || "未知错误");
       return Promise.reject(
-        response.data || { code: response.status, msg: "请求错误" }
+        response.data || { code: response.status, msg: "请求错误" },
       );
     }
   },
@@ -79,7 +78,7 @@ service.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export { service, mockService };
