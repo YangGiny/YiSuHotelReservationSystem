@@ -1,4 +1,4 @@
-import { Capacitor } from '@capacitor/core';
+import { Capacitor } from "@capacitor/core";
 
 /**
  * 获取当前环境的 API Base URL
@@ -9,17 +9,17 @@ export const getBaseUrl = () => {
   if (Capacitor.isNativePlatform()) {
     // 安卓模拟器需要用 10.0.2.2 访问宿主机
     // 如果是真机调试，可能需要改成局域网 IP: 'http://192.168.0.102:3000/api'
-    return 'http://10.0.2.2:3000/api';
+    return "http://10.0.2.2:3000/api";
   }
 
   // 2. 微信小程序端 (WeChat Mini Program)
-  if (process.env.TARO_ENV === 'weapp') {
+  if (process.env.TARO_ENV === "weapp") {
     // 开发者工具用 localhost，真机需要改成局域网 IP
-    return 'http://localhost:3000/api';
+    return "http://localhost:3000/api";
   }
 
   // 3. H5 浏览器环境
-  return 'http://localhost:3000/api';
+  return "https://yi-su-hotel-reservation-system-app.vercel.app/api";
 };
 
 export const BASE_URL = getBaseUrl();
